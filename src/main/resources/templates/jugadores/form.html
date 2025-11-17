@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Jugador</title>
+</head>
+<body>
+
+<h1 th:text="${jugador.numero == null} ? 'Crear Jugador' : 'Editar Jugador'"></h1>
+
+<form th:action="@{/jugadores/guardar}" th:object="${jugador}" method="post">
+
+    <label>Número de camiseta:</label>
+    <input type="number" th:field="*{numero}" required />
+    <br><br>
+
+    <label>Nombre:</label>
+    <input type="text" th:field="*{nombre}" required />
+    <br><br>
+
+    <label>Equipo:</label>
+    <select th:field="*{equipo}" required>
+        <option value="">Seleccione</option>
+        <option th:each="eq : ${equipos}"
+                th:value="${eq.id}"
+                th:text="${eq.nombre}">
+        </option>
+    </select>
+    <br><br>
+
+    <button type="submit">Guardar</button>
+</form>
+
+<a th:href="@{/jugadores}">Volver</a>
+
+</body>
+</html>
