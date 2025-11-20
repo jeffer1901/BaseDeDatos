@@ -12,38 +12,43 @@
 
     <form th:action="@{/sanciones/guardar}" th:object="${sancion}" method="post">
 
+        <!-- TIPO -->
         <div class="mb-3">
             <label class="form-label">Tipo de Sanción</label>
             <select th:field="*{tipo}" class="form-select" required>
                 <option value="">Seleccione un tipo</option>
-                <option th:each="t : ${tiposSancion}"
+                <option th:each="t : ${tipos}"
                         th:value="${t}"
                         th:text="${t}">
                 </option>
             </select>
         </div>
 
+        <!-- OBSERVACIONES -->
         <div class="mb-3">
             <label class="form-label">Observaciones</label>
             <textarea th:field="*{observaciones}" class="form-control" rows="3"></textarea>
         </div>
 
+        <!-- DURACION -->
         <div class="mb-3">
-            <label class="form-label">Duración (minutos / partidos)</label>
+            <label class="form-label">Duración (minutos/partidos)</label>
             <input type="number" th:field="*{duracion}" class="form-control">
         </div>
 
+        <!-- FECHA -->
         <div class="mb-3">
             <label class="form-label">Fecha</label>
             <input type="date" th:field="*{fecha}" class="form-control" required>
         </div>
 
+        <!-- JUGADOR -->
         <div class="mb-3">
             <label class="form-label">Jugador</label>
-            <select th:field="*{jugador}" class="form-select" required>
+            <select name="jugadorId" class="form-select" required>
                 <option value="">Seleccione un jugador</option>
                 <option th:each="j : ${jugadores}"
-                        th:value="${j}"
+                        th:value="${j.id}"
                         th:text="${j.nombre + ' ' + j.apellido}">
                 </option>
             </select>
@@ -57,4 +62,3 @@
 
 </body>
 </html>
-

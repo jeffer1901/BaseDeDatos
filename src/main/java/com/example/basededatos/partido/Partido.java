@@ -14,7 +14,6 @@ import java.time.LocalTime;
 @Entity
 @Table(name="partidos")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Partido {
     @Id
@@ -37,4 +36,9 @@ public class Partido {
     @ManyToOne
     @JoinColumn(name = "competencia_id")
     private Competencia competencia;
+    public Partido() {
+        this.equipoLocal = new Equipo();
+        this.equipoVisitante = new Equipo();
+        this.competencia = new Competencia();
+    }
 }

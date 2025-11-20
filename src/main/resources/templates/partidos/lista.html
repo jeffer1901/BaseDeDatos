@@ -34,7 +34,7 @@
         <td th:text="${p.competencia.nombre}"></td>
 
         <td>
-            <a th:href="@{|/partidos/editar/${p.id}|}" class="btn btn-warning btn-sm">Editar</a>
+            <a th:href="@{/partidos/editar/{id}(id=${p.id})}" class="btn btn-warning btn-sm">Editar</a>
             <a th:href="@{|/partidos/eliminar/${p.id}|}" class="btn btn-danger btn-sm"
                onclick="return confirm('¿Eliminar partido?')">Eliminar</a>
         </td>

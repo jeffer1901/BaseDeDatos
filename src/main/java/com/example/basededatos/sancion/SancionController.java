@@ -35,9 +35,16 @@ public class SancionController {
 
     // GUARDAR
     @PostMapping("/guardar")
-    public String guardar(@ModelAttribute Sancion sancion) {
+    public String guardar(@ModelAttribute Sancion sancion,
+                          @RequestParam Long jugadorId) {
+
+        var jugador = jugadorService.findById(jugadorId)
+                .orElseThrow(() -> new IllegalArgumentException("Jugador no encontrado"));
+
+        sancion.setJugador(jugador);
+
         sancionService.save(sancion);
-        return "redirect:/sancion";
+        return "redirect:/sanciones";
     }
 
     // FORM EDITAR
@@ -53,11 +60,24 @@ public class SancionController {
         return "sancion/editar";
     }
 
+    // ACTUALIZAR
+    @PostMapping("/actualizar")
+    public String actualizar(@ModelAttribute Sancion sancion,
+                             @RequestParam Long jugadorId) {
+
+        var jugador = jugadorService.findById(jugadorId)
+                .orElseThrow(() -> new IllegalArgumentException("Jugador no encontrado"));
+
+        sancion.setJugador(jugador);
+
+        sancionService.save(sancion);
+        return "redirect:/sanciones";
+    }
+
     // ELIMINAR
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Long id) {
         sancionService.delete(id);
-        return "redirect:/sancion";
+        return "redirect:/sanciones";
     }
-
 }

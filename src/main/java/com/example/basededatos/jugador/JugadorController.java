@@ -34,11 +34,31 @@ public class JugadorController {
 
     // GUARDAR NUEVO
     @PostMapping("/guardar")
-    public String guardar(@ModelAttribute("jugador") Jugador jugador) {
+    public String guardar(@ModelAttribute("jugador") Jugador jugador,
+                          @RequestParam Long equipoId) {
+
+        var equipo = equipoService.findById(equipoId)
+                .orElseThrow(() -> new IllegalArgumentException("Equipo no encontrado"));
+
+        jugador.setEquipo(equipo);
+
         jugadorService.save(jugador);
+
         return "redirect:/jugadores";
     }
+    @PostMapping("/actualizar")
+    public String actualizar(@ModelAttribute("jugador") Jugador jugador,
+                             @RequestParam Long equipoId) {
 
+        var equipo = equipoService.findById(equipoId)
+                .orElseThrow(() -> new IllegalArgumentException("Equipo no encontrado"));
+
+        jugador.setEquipo(equipo);
+
+        jugadorService.save(jugador);
+
+        return "redirect:/jugadores";
+    }
     // FORMULARIO EDITAR
     @GetMapping("/editar/{id}")
     public String editarForm(@PathVariable Long id, Model model) {

@@ -34,9 +34,12 @@
 
         <div class="mb-3">
             <label class="form-label">Equipo</label>
-            <select th:field="*{equipo}" class="form-select">
+            <select name="equipoId" class="form-select">
                 <option value="">Seleccione un equipo</option>
-                <option th:each="e : ${equipos}" th:value="${e}" th:text="${e.nombre}"></option>
+                <option th:each="e : ${equipos}"
+                        th:value="${e.id}"
+                        th:text="${e.nombre}">
+                </option>
             </select>
         </div>
 

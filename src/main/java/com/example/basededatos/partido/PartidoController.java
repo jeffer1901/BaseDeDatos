@@ -39,18 +39,65 @@ public class PartidoController {
         return "partidos/crear";
     }
 
-    // GUARDAR
     @PostMapping("/guardar")
-    public String guardarPartido(@ModelAttribute Partido partido) {
+    public String guardar(@ModelAttribute Partido partido,
+                          @RequestParam Long equipoLocalId,
+                          @RequestParam Long equipoVisitanteId,
+                          @RequestParam Long competenciaId) {
+
+        var local = equipoService.findById(equipoLocalId)
+                .orElseThrow(() -> new IllegalArgumentException("Equipo local no encontrado"));
+
+        var visitante = equipoService.findById(equipoVisitanteId)
+                .orElseThrow(() -> new IllegalArgumentException("Equipo visitante no encontrado"));
+
+        var competencia = competenciaService.findById(competenciaId)
+                .orElseThrow(() -> new IllegalArgumentException("Competencia no encontrada"));
+
+        partido.setEquipoLocal(local);
+        partido.setEquipoVisitante(visitante);
+        partido.setCompetencia(competencia);
+
         partidoService.save(partido);
+        return "redirect:/partidos";
+    }
+    @PostMapping("/actualizar")
+    public String actualizar(@ModelAttribute Partido partido,
+                             @RequestParam Long equipoLocalId,
+                             @RequestParam Long equipoVisitanteId,
+                             @RequestParam Long competenciaId) {
+
+        // 1️⃣ Buscar el partido original en la BD
+        Partido partidoBD = partidoService.findById(partido.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Partido no encontrado"));
+
+        // 2️⃣ Actualizar los campos enviados
+        partidoBD.setFecha(partido.getFecha());
+        partidoBD.setHora(partido.getHora());
+
+        var local = equipoService.findById(equipoLocalId)
+                .orElseThrow(() -> new IllegalArgumentException("Equipo local no encontrado"));
+        var visitante = equipoService.findById(equipoVisitanteId)
+                .orElseThrow(() -> new IllegalArgumentException("Equipo visitante no encontrado"));
+        var competencia = competenciaService.findById(competenciaId)
+                .orElseThrow(() -> new IllegalArgumentException("Competencia no encontrada"));
+
+        partidoBD.setEquipoLocal(local);
+        partidoBD.setEquipoVisitante(visitante);
+        partidoBD.setCompetencia(competencia);
+
+        // 3️⃣ Guardar todo actualizado
+        partidoService.save(partidoBD);
+
         return "redirect:/partidos";
     }
 
     // FORMULARIO EDITAR
     @GetMapping("/editar/{id}")
-    public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
-        Partido partido = partidoService.findById(id)
-                .orElseThrow(() -> new RuntimeException("Partido no encontrado"));
+    public String editarForm(@PathVariable Long id, Model model) {
+
+        var partido = partidoService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Partido no encontrado"));
 
         model.addAttribute("partido", partido);
         model.addAttribute("equipos", equipoService.findAll());

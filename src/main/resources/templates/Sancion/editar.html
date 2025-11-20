@@ -18,7 +18,7 @@
         <div class="mb-3">
             <label class="form-label">Tipo de Sanción</label>
             <select th:field="*{tipo}" class="form-select" required>
-                <option th:each="t : ${tiposSancion}"
+                <option th:each="t : ${tipos}"
                         th:value="${t}"
                         th:text="${t}"
                         th:selected="${t == sancion.tipo}">
@@ -43,9 +43,9 @@
 
         <div class="mb-3">
             <label class="form-label">Jugador</label>
-            <select th:field="*{jugador}" class="form-select" required>
+            <select name="jugadorId" class="form-select" required>
                 <option th:each="j : ${jugadores}"
-                        th:value="${j}"
+                        th:value="${j.id}"
                         th:text="${j.nombre + ' ' + j.apellido}"
                         th:selected="${j.id == sancion.jugador?.id}">
                 </option>

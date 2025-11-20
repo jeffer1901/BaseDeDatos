@@ -3,60 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>Crear Partido</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet">
 </head>
-<body class="bg-light">
 
-<div class="container mt-4">
-    <h1>Crear Partido</h1>
+<body class="container mt-4">
 
-    <form th:action="@{/partidos/guardar}" th:object="${partido}" method="post">
+<h1 class="mb-4 text-center">Crear Partido</h1>
 
-        <div class="mb-3">
-            <label class="form-label">Fecha</label>
-            <input type="date" th:field="*{fecha}" class="form-control" required>
-        </div>
+<form th:action="@{/partidos/guardar}" th:object="${partido}" method="post" class="card p-4 shadow">
 
-        <div class="mb-3">
-            <label class="form-label">Hora</label>
-            <input type="time" th:field="*{hora}" class="form-control" required>
-        </div>
+    <!-- FECHA -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Fecha</label>
+        <input type="date" class="form-control" th:field="*{fecha}" required>
+    </div>
 
-        <div class="mb-3">
-            <label class="form-label">Equipo Local</label>
-            <select th:field="*{equipoLocal}" class="form-select" required>
-                <option value="">Seleccione el equipo local</option>
-                <option th:each="e : ${equipos}"
-                        th:value="${e}"
-                        th:text="${e.nombre}"></option>
-            </select>
-        </div>
+    <!-- HORA -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Hora</label>
+        <input type="time" class="form-control" th:field="*{hora}" required>
+    </div>
 
-        <div class="mb-3">
-            <label class="form-label">Equipo Visitante</label>
-            <select th:field="*{equipoVisitante}" class="form-select" required>
-                <option value="">Seleccione el equipo visitante</option>
-                <option th:each="e : ${equipos}"
-                        th:value="${e}"
-                        th:text="${e.nombre}"></option>
-            </select>
-        </div>
+    <!-- EQUIPO LOCAL -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Equipo Local</label>
+        <select class="form-select" th:field="*{equipoLocal}" required>
+            <option value="">Seleccione...</option>
+            <option th:each="e : ${equipos}"
+                    th:value="${e.id}"
+                    th:text="${e.nombre}">
+            </option>
+        </select>
+    </div>
 
-        <div class="mb-3">
-            <label class="form-label">Competencia</label>
-            <select th:field="*{competencia}" class="form-select" required>
-                <option value="">Seleccione una competencia</option>
-                <option th:each="c : ${competencias}"
-                        th:value="${c}"
-                        th:text="${c.nombre}"></option>
-            </select>
-        </div>
+    <!-- EQUIPO VISITANTE -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Equipo Visitante</label>
+        <select class="form-select" th:field="*{equipoVisitante}" required>
+            <option value="">Seleccione...</option>
+            <option th:each="e : ${equipos}"
+                    th:value="${e.id}"
+                    th:text="${e.nombre}">
+            </option>
+        </select>
+    </div>
 
-        <button class="btn btn-success">Guardar</button>
-        <a href="/partidos" class="btn btn-secondary">Volver</a>
+    <!-- COMPETENCIA -->
+    <div class="mb-3">
+        <label class="form-label fw-bold">Competencia</label>
+        <select class="form-select" th:field="*{competencia}" required>
+            <option value="">Seleccione...</option>
+            <option th:each="c : ${competencias}"
+                    th:value="${c.id}"
+                    th:text="${c.nombre}">
+            </option>
+        </select>
+    </div>
 
-    </form>
-</div>
+    <!-- BOTONES -->
+    <div class="mt-3">
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="/partidos" class="btn btn-secondary ms-2">Cancelar</a>
+    </div>
+
+</form>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+</script>
 
 </body>
 </html>

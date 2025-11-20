@@ -8,7 +8,7 @@
 <body class="bg-light">
 
 <div class="container mt-4">
-    <h1>Editar Partido</h1>
+    <h1 class="mb-4">Editar Partido</h1>
 
     <form th:action="@{/partidos/actualizar}" th:object="${partido}" method="post">
 
@@ -25,33 +25,36 @@
             <input type="time" th:field="*{hora}" class="form-control" required>
         </div>
 
+        <!-- EQUIPO LOCAL -->
         <div class="mb-3">
             <label class="form-label">Equipo Local</label>
-            <select th:field="*{equipoLocal}" class="form-select" required>
+            <select name="equipoLocalId" class="form-select" required>
                 <option th:each="e : ${equipos}"
-                        th:value="${e}"
+                        th:value="${e.id}"
                         th:text="${e.nombre}"
                         th:selected="${e.id == partido.equipoLocal?.id}">
                 </option>
             </select>
         </div>
 
+        <!-- EQUIPO VISITANTE -->
         <div class="mb-3">
             <label class="form-label">Equipo Visitante</label>
-            <select th:field="*{equipoVisitante}" class="form-select" required>
+            <select name="equipoVisitanteId" class="form-select" required>
                 <option th:each="e : ${equipos}"
-                        th:value="${e}"
+                        th:value="${e.id}"
                         th:text="${e.nombre}"
                         th:selected="${e.id == partido.equipoVisitante?.id}">
                 </option>
             </select>
         </div>
 
+        <!-- COMPETENCIA -->
         <div class="mb-3">
             <label class="form-label">Competencia</label>
-            <select th:field="*{competencia}" class="form-select" required>
+            <select name="competenciaId" class="form-select" required>
                 <option th:each="c : ${competencias}"
-                        th:value="${c}"
+                        th:value="${c.id}"
                         th:text="${c.nombre}"
                         th:selected="${c.id == partido.competencia?.id}">
                 </option>
