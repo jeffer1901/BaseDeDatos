@@ -31,7 +31,7 @@
     <!-- EQUIPO LOCAL -->
     <div class="mb-3">
         <label class="form-label fw-bold">Equipo Local</label>
-        <select class="form-select" th:field="*{equipoLocal}" required>
+        <select class="form-select" name="equipoLocalId" required>
             <option value="">Seleccione...</option>
             <option th:each="e : ${equipos}"
                     th:value="${e.id}"
@@ -43,7 +43,7 @@
     <!-- EQUIPO VISITANTE -->
     <div class="mb-3">
         <label class="form-label fw-bold">Equipo Visitante</label>
-        <select class="form-select" th:field="*{equipoVisitante}" required>
+        <select class="form-select" name="equipoVisitanteId" required>
             <option value="">Seleccione...</option>
             <option th:each="e : ${equipos}"
                     th:value="${e.id}"
@@ -52,10 +52,11 @@
         </select>
     </div>
 
+
     <!-- COMPETENCIA -->
     <div class="mb-3">
         <label class="form-label fw-bold">Competencia</label>
-        <select class="form-select" th:field="*{competencia}" required>
+        <select class="form-select" name="competenciaId" required>
             <option value="">Seleccione...</option>
             <option th:each="c : ${competencias}"
                     th:value="${c.id}"
