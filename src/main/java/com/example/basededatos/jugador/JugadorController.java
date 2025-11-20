@@ -29,7 +29,7 @@ public class JugadorController {
     public String crearForm(Model model) {
         model.addAttribute("jugador", new Jugador());
         model.addAttribute("equipos", equipoService.findAll());
-        return "jugadores/form";
+        return "jugadores/crear";
     }
 
     // GUARDAR NUEVO
@@ -47,7 +47,7 @@ public class JugadorController {
 
         model.addAttribute("jugador", jugador);
         model.addAttribute("equipos", equipoService.findAll());
-        return "jugadores/form";
+        return "jugadores/editar";
     }
 
     // ELIMINAR

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Jugador</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-4">
+    <h1>Editar Jugador</h1>
+
+    <form th:action="@{/jugadores/actualizar}" th:object="${jugador}" method="post">
+
+        <!-- ID oculto -->
+        <input type="hidden" th:field="*{id}">
+
+        <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input th:field="*{nombre}" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Apellido</label>
+            <input th:field="*{apellido}" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Posición</label>
+            <input th:field="*{posicion}" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Número Camiseta</label>
+            <input type="number" th:field="*{numero}" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Equipo</label>
+            <select th:field="*{equipo}" class="form-select">
+                <option value="">Seleccione un equipo</option>
+                <option th:each="e : ${equipos}"
+                        th:value="${e}"
+                        th:text="${e.nombre}"
+                        th:selected="${e.id == jugador.equipo?.id}">
+                </option>
+            </select>
+        </div>
+
+        <button class="btn btn-success">Actualizar</button>
+        <a href="/jugadores" class="btn btn-secondary">Volver</a>
+
+    </form>
+</div>
+
+</body>
+</html>

@@ -36,7 +36,7 @@ public class PartidoController {
         model.addAttribute("partido", new Partido());
         model.addAttribute("equipos", equipoService.findAll());
         model.addAttribute("competencias", competenciaService.findAll());
-        return "partidos/form";
+        return "partidos/crear";
     }
 
     // GUARDAR
@@ -56,7 +56,7 @@ public class PartidoController {
         model.addAttribute("equipos", equipoService.findAll());
         model.addAttribute("competencias", competenciaService.findAll());
 
-        return "partidos/form";
+        return "partidos/editar";
     }
 
     // ELIMINAR

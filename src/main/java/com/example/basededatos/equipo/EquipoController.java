@@ -28,7 +28,7 @@ public class EquipoController {
     @GetMapping("/crear")
     public String mostrarFormularioCrear(Model model) {
         model.addAttribute("equipo", new Equipo());
-        return "equipos/form";
+        return "equipos/crear";
     }
 
     // GUARDAR
@@ -44,7 +44,7 @@ public class EquipoController {
         Equipo equipo = equipoService.findById(id)
                 .orElseThrow(() -> new RuntimeException("Equipo no encontrado"));
         model.addAttribute("equipo", equipo);
-        return "equipos/form";
+        return "equipos/editar";
     }
 
     // ACTUALIZAR

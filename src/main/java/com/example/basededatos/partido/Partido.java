@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -23,6 +24,7 @@ public class Partido {
     private LocalDate fecha;
     private LocalTime hora;
 
+
     @ManyToOne
     @JoinColumn(name = "local_id")
     private Equipo equipoLocal;
@@ -31,6 +33,7 @@ public class Partido {
     @JoinColumn(name = "visitante_id")
     private Equipo equipoVisitante;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "competencia_id")
     private Competencia competencia;

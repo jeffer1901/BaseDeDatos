@@ -30,7 +30,7 @@ public class SancionController {
         model.addAttribute("sancion", new Sancion());
         model.addAttribute("jugadores", jugadorService.findAll());
         model.addAttribute("tipos", Sancion.TipoSancion.values());
-        return "sancion/form";
+        return "sancion/crear";
     }
 
     // GUARDAR
@@ -50,7 +50,7 @@ public class SancionController {
         model.addAttribute("jugadores", jugadorService.findAll());
         model.addAttribute("tipos", Sancion.TipoSancion.values());
 
-        return "sancion/form";
+        return "sancion/editar";
     }
 
     // ELIMINAR

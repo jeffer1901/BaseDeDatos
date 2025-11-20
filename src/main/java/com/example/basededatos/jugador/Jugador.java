@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class Jugador {
     private String posicion;
     private int numero;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "equipo_id")
     private Equipo equipo;
